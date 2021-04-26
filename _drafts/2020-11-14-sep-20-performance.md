@@ -1,6 +1,6 @@
 ---
 title: Sep 20 performance TEST
-month: Sep '20
+month: Sep-2020
 layout: monthly-performance
 ---
 

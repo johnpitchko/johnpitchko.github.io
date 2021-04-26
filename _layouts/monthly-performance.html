@@ -7,14 +7,14 @@ classes: wide
 
 <h2>Monthly statement</h2>
 
-{% assign monthly-report = site.data.monthly-performance | find: "Month", page.month %}
+{% assign monthly-report = site.data.monthly-performance-summary | find: "Month", page.month %}
 {% assign closed-positions = site.data.closed-positions | where: "Closed month", page.month | jsonify %}
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col">&nbsp;</th>
-      <th scope="col" class="text-right">Current month ($CAD)</th>
+      <th scope="col" class="text-right">Current month ($USD)</th>
     </tr>
   </thead>
   <tbody>
@@ -23,15 +23,11 @@ classes: wide
       <td class="text-right"><strong>{{ monthly-report['Opening balance'] | money_from_amount }}</strong></td>
     </tr>
     <tr>
-      <td>Deposits</td>
-      <td class="text-right">{{ monthly-report['Deposits'] | money_from_amount }}</td>
+      <td>Deposits & Withdrawals</td>
+      <td class="text-right">{{ monthly-report['Deposits & withdrawals'] | money_from_amount }}</td>
     </tr>
     <tr>
-      <td>Withdrawals</td>
-      <td class="text-right">{{ monthly-report['Withdrawals'] | money_from_amount }}</td>
-    </tr>
-    <tr>
-      <td>Change in balance</td>
+      <td>Change in balance (P/L, monthly)</td>
       <td class="text-right">{{ monthly-report['Change in balance'] | money_from_amount }}</td>
     </tr>
     <tr>
@@ -43,8 +39,8 @@ classes: wide
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>Cumulative portfolio net P/L</td>
-      <td class="text-right">{{ monthly-report['Change in balance since open'] | money_from_amount }}</td>
+      <td>P/L, cumulative</td>
+      <td class="text-right">{{ monthly-report['P/L, cumulative'] | money_from_amount }}</td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -52,19 +48,21 @@ classes: wide
     </tr>
     <tr>
       <td>Portfolio return</td>
-      <td class="text-right">{{ monthly-report['Portfolio return'] }}%</td>
+      <td class="text-right">{{ monthly-report['Total return'] }}%</td>
     </tr>
     <tr>
-      <td>SPY return</td>
+      <td>SPY return <a href="#1"><sup>1</sup></a></td>
       <td class="text-right">{{ monthly-report['SPY return'] }}%</td>
     </tr>
   </tbody>
 </table>
 
-<h2>Positions closed this month</h2>
+<p><sup>1</sup> SPY returns sourced from <a href="https://performance.morningstar.com/funds/etf/total-returns.action?t=spy">Morningstar</a>.</p>
+
+<!-- <h2>Positions closed this month</h2>
 
 
-<div id="closed-positions-table" class="table-dark"></div>
+<div id="closed-positions-table" class="table-dark"></div> -->
 
 <script>
   var myCountCalc = function(values, data, calcParams){
@@ -91,4 +89,4 @@ classes: wide
   });
 </script>
 
-<p><small>Powered by <a href="http://tabulator.info">Tabulator.js</a>.</small></p>
+<!-- <p><small>Powered by <a href="http://tabulator.info">Tabulator.js</a>.</small></p> -->

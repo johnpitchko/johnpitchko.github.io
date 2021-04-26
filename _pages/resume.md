@@ -35,6 +35,19 @@ Leading a team of 6 Academic Chairs and over 200 instructors to deliver accredit
   - Developed a new Work-integrated Learning strategy for the school.
   - Streamlined a number of operational activities, saving over 100 hours of labour each year.
 
+#### Key Accomplishments/Projects
+1. Work-integrated Learning 2.0
+* Developed and launched an optional cooperative education program
+* Developed a new school-wide integrated capstone project course and implemented within all diploma programs in the school
+
+1. Implementation of Bring-Your-Own-Device and Cloud Services
+* Reduced annual operational costs by more than $500k by converting educational programs to BYOD
+
+1. Portfolio Rationalization
+* Suspended underperforming programs
+
+
+
 ### Advisor
 2014 - 2018\\
 [Platform Calgary](https://www.platformcalgary.com), Calgary, Alberta

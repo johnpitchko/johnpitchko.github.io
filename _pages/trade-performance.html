@@ -4,16 +4,21 @@ permalink: /trade-performance/
 classes: wide
 ---
 
-{% assign monthly-performance = site.data.monthly-performance | jsonify %}
+{% assign monthly-performance = site.data.monthly-performance-summary | jsonify %}
 
-<p>My option trading performance, measured monthly. The goal is to 'beat the market', that is to outperform the S&P 500 index. The S&P 500 is an index that tracks the 500 largest US publicly-traded companies. The index is commonly used as a measure of the overal US stock market.</p>
+<p>My option trading performance, measured monthly. The goal is to 'beat the market', that is to outperform the <a href="https://www.ssga.com/us/en/institutional/etfs/funds/spdr-sp-500-etf-trust-spy">SPDR S&P 500 ETF Trust (SPY)<a> ETF.</p>
 
-<p>Powered by <a href="https://www.chartjs.org">ChartJS</a> and <a href="http://tabulator.info/">Tabulator.js</a>. S&P 500 performance data from <a href="https://ycharts.com/indicators/sp_500_monthly_return">YCharts</a>.</p>
+<p>SPY is an <a href="https://www.investopedia.com/terms/e/etf.asp">exchange traded fund (ETF)</a> from <a href="https://www.ssga.com/us/en/institutional/etfs">State Street Global Advisors</a> that tracks the S&P 500, which comprises most (but not all) of the 500 largest US publicly-traded companies. The index is commonly used as a measure of the overal US stock market. SPY is the world's most popular ETF with over $350 billion assets under management. SPY also has one of the most active, <em>if not the most active,</em> option markets in the world. <a href="https://research.investors.com/options-center/reports/option-volume">Almost half a million SPY options are traded each day.</a></p>
+
+<p><em>Why benchmark against SPY?</em> Because SPY pretty much represents the whole US stock market. It represents my opportunity cost. If I was not actively trading options, I would be investing in SPY. So outperforming SPY means that my active option trading strategy is generating more profit than if I were to just invest the whole account in SPY.</p>
+
+<p>Powered by <a href="https://www.chartjs.org">ChartJS</a> and <a href="http://tabulator.info/">Tabulator.js</a>. SPY performance data from <a href="https://performance.morningstar.com/funds/etf/total-returns.action?t=spy">Morningstar</a>.</p>
 
 <canvas id="myChart" height="300"></canvas>
 
-<strong>Reported P/L, cumulative</strong> is the profit/loss reported by the broker. It includes open profits/losses in long stock positions, which I am holding until they can be closed for a profit. Many of these long stock positions lost value in the 2020 market meltdown, which is dragging down the total portfolio return. <strong>Position P/L</strong> values are the profits or losses from closing options (and a few stock) positions in the month.
-<canvas id="return-cumulative-chart" height="300"></canvas>
+<!-- <strong>Reported P/L, cumulative</strong> is the profit/loss reported by the broker. It includes open profits/losses in long stock positions, which I am holding until they can be closed for a profit. Many of these long stock positions lost value in the 2020 market meltdown, which is dragging down the total portfolio return. <strong>Position P/L</strong> values are the profits or losses from closing options (and a few stock) positions in the month.
+<canvas id="return-cumulative-chart" height="300"></canvas> -->
+
 <div id="monthly-performance-table-2" class="table-dark"></div>
 
 <script>
@@ -39,10 +44,10 @@ classes: wide
     headerHozAlign: 'right',
     columns: [
     { title: 'Month', field: 'Month', hozAlign: 'left', headerHozAlign: 'left' },
-    { title: 'Return, monthly', field: 'Change in balance', formatter: 'money', formatterParams: { symbol: '$' }, bottomCalc: 'sum', bottomCalcFormatter: 'money', bottomCalcFormatterParams: { symbol: '$' } },
-    { title: 'Return, cumulative', field: 'Cumulative net P/L', formatter: 'money', formatterParams: { symbol: '$' }, },
-    { title: 'Portfolio Return', field: 'Portfolio return', formatter: percentageFormatter, bottomCalc: percentageCalc, bottomCalcFormatter: percentageFormatter },
-    { title: 'SPY Return', field: 'SPY return', formatter: percentageFormatter, bottomCalc: percentageCalc, bottomCalcFormatter: percentageFormatter },
+    { title: 'P/L, monthly', field: 'Change in balance', formatter: 'money', formatterParams: { symbol: '$' }, bottomCalc: 'sum', bottomCalcFormatter: 'money', bottomCalcFormatterParams: { symbol: '$' } },
+    { title: 'P/L, cumulative', field: 'P/L, cumulative', formatter: 'money', formatterParams: { symbol: '$' }, },
+    { title: 'Total return', field: 'Total return', formatter: percentageFormatter, bottomCalc: percentageCalc, bottomCalcFormatter: percentageFormatter },
+    { title: 'SPY return', field: 'SPY return', formatter: percentageFormatter, bottomCalc: percentageCalc, bottomCalcFormatter: percentageFormatter },
     ]
   });
 
@@ -54,8 +59,8 @@ classes: wide
     type: 'line',
     data: {
       datasets: [{
-        label: 'My portfolio return (%)',
-        data: {{ monthly-performance }}.map(x => x['Portfolio return']),
+        label: 'Total return (%)',
+        data: {{ monthly-performance }}.map(x => x['Total return']),
         fill: false,
         borderColor: 'rgba(153, 102, 255, 1)',
       }, {
@@ -67,24 +72,24 @@ classes: wide
     },
   });
 
-  var x = document.getElementById('return-cumulative-chart').getContext('2d');
-  var y = new Chart(x, {
-    type: 'line',
-    data: {
-      datasets: [{
-        label: 'Reported P/L, cumulative',
-        data: {{ monthly-performance }}.map(x => x['Cumulative net P/L']),
-        borderColor: 'rgba(100,200,300, 1)',
-      }, {
-        label: 'Position P/L, monthly',
-        data: {{ monthly-performance }}.map(x => x['Position net P/L']),
-        borderColor: 'rgba(200, 300, 100, 1)',
-      }, {
-        label: 'Position P/L, cumulative',
-        data: {{ monthly-performance }}.map(x => x['Position cumulative net P/L']),
-        borderColor: 'rgba(300,100,200,1)',
-      }],
-      labels: {{ monthly-performance }}.map(x => x['Month']),
-    },
-  });
+  // var x = document.getElementById('return-cumulative-chart').getContext('2d');
+  // var y = new Chart(x, {
+  //   type: 'line',
+  //   data: {
+  //     datasets: [{
+  //       label: 'P/L, cumulative',
+  //       data: {{ monthly-performance }}.map(x => x['Cumulative net P/L']),
+  //       borderColor: 'rgba(100,200,300, 1)',
+  //     }, {
+  //       label: 'P/L, monthly',
+  //       data: {{ monthly-performance }}.map(x => x['Position net P/L']),
+  //       borderColor: 'rgba(200, 300, 100, 1)',
+  //     }, {
+  //       label: 'Position P/L, cumulative',
+  //       data: {{ monthly-performance }}.map(x => x['Position cumulative net P/L']),
+  //       borderColor: 'rgba(300,100,200,1)',
+  //     }],
+  //     labels: {{ monthly-performance }}.map(x => x['Month']),
+  //   },
+  // });
 </script>
