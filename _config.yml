@@ -23,7 +23,7 @@ email: john.pitchko@icloud.com
 description: >- # this means to ignore newlines until "baseurl:"
   Ruby | Rails | AWS | Neovim
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://johnpitchko.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  johnpitchko
 
@@ -44,6 +44,26 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+
+# Minimal Mistakes configuration
+minimal_mistakes_skin: dark
+site.locale: en-CA
+name: John Pitchko
+repository: johnpitchko/johnpitchko.github.io
+
+# Sensible defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
