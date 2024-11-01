@@ -1,5 +1,5 @@
 ---
-title:  "Minimal Neovim"
+title:  "Minimal Neovim pt1: Factory Reset, Package Management, and File Management"
 date:   2024-10-31
 ---
 
@@ -48,6 +48,8 @@ Lazy.nvim seemed like a decent enough and common package manager, so I installed
 Opening Neovim (and ignoring the warning message `No specs found for module 'plugins'`) and running `:Lazy` presented the Lazy.nvim menu:
 
 Lazy can be opened using the command `:Lazy`.
+
+Other commands are intuitive and are marked in the panel: `I` to install new packages, `U` to update packages, etc...
 
 # Install File Manager
 
