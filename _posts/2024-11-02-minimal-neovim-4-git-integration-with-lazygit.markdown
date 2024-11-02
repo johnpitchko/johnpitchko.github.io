@@ -1,5 +1,5 @@
 ---
-title: "Minimal Neovim pt4: Lazygit"
+title: "Minimal Neovim pt4: Git integration with Lazygit"
 date: 2024-11-02
 ---
 
