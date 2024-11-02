@@ -27,6 +27,7 @@ What are the features that I need in Neovim to accomplish my day-to-day job?
 9. Git integration
 10. Syntax highlighting
 11. Status bar
+12. Window and tab management
 
 Other functional requirements might arise over time. Let's see how this goes.
 

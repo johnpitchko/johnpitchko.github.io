@@ -80,4 +80,13 @@ return {
 }
 ```
 
+A couple of which-key notes (mostly for my future reference):
 
+1. Keymaps can be grouped together for easier navigation. That is, group all the Git-related keymaps under `G`. Example:
+
+```
+        { "<leader>g", group = "git", desc = "Git" },
+        { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+```
+
+After these changes, I can see all availble keymaps simply by pressing my leader key (currently `<space>`). And, now I can open and close the Neotree window with `<leader>e`.
