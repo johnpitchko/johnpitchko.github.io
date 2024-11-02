@@ -36,4 +36,9 @@ return {
 }
 ```
 
-I made a couple of small modifications from the default. I added a group to which-key to display all the Git keymaps in one place.
+The configuration is pretty much an exact copy and paste from the repo, but I added a group to which-key to display all the Git keymaps in one place.
+
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2024-11-02-lazygit.png)
+
+
+Pressing `<leader>gg` openx the LazyGit window inside Neovim, and all normal git workflows are successful.
